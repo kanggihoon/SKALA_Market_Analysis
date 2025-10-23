@@ -1,8 +1,10 @@
-# 다국적 시장 진출 전략 보고서 생성 시스템 📊
+# 전략 리포트 생성 데모 시스템
 
-**스타트업 3개 × 타깃국가별 시장·규제·경쟁·GTM·파트너·리스크 분석 자동화**
+**독립 실행 가능한 HTML + DOCX 리포트 생성기**
 
-> 기획서 v1.0 기반 Agentic Workflow 구현
+> 메인 파이프라인과 독립적으로 실행되는 리포트 템플릿 및 생성기
+>
+> 빠른 프로토타이핑 및 리포트 포맷 테스트용
 
 ---
 
@@ -36,18 +38,22 @@
 ## 📁 파일 구조
 
 ```
-/home/claude/
-├── report_templates.py          # HTML 보고서 생성기 (핵심)
-├── docx_report_generator.py     # DOCX 보고서 생성기
-├── report_agent.py              # LangGraph 통합 에이전트
+demo file/
+├── report_templates.py          # HTML 보고서 템플릿 생성기 (Tailwind CSS)
+├── docx_report_generator.py     # DOCX 보고서 생성기 (python-docx)
+├── report_agent.py              # LangGraph 통합 가능한 에이전트
 ├── report_guide.py              # 프롬프트 템플릿 & 가이드
-├── test_report_generation.py    # 독립 테스트 스크립트
-└── README.md                    # 이 파일
+├── test_report_generation.py    # 독립 테스트 스크립트 (샘플 데이터 포함)
+└── README.md                    # 이 문서
 
-/mnt/user-data/outputs/
-├── strategy_report_스타트업A_베트남_DEMO.html  # 생성된 HTML
-└── strategy_report_스타트업A_베트남_DEMO.docx  # 생성된 DOCX
+# 실행 시 생성되는 출력물 (프로젝트 루트에 생성)
+output_demo_*.html               # 데모 HTML 리포트
+output_demo_*.docx               # 데모 DOCX 리포트
 ```
+
+**메인 파이프라인과의 차이점**:
+- 메인 파이프라인: `src/app.py` → 전체 에이전트 실행 → `outputs/{Company}_{Country}/`
+- 데모 시스템: `demo file/test_report_generation.py` → 샘플 데이터만 사용 → 루트에 출력
 
 ---
 
@@ -56,11 +62,20 @@
 ### 1. 독립 실행 (테스트)
 
 ```bash
-cd /home/claude
+# 프로젝트 루트에서
+cd "demo file"
 python test_report_generation.py
 ```
 
-이 명령은 샘플 데이터로 HTML + DOCX 보고서를 즉시 생성합니다.
+**실행 결과**:
+- 샘플 데이터로 HTML + DOCX 보고서를 즉시 생성
+- 출력 위치: 프로젝트 루트 (`../output_demo_*.html`, `../output_demo_*.docx`)
+- 의존성: `python-docx` (메인 `requirements.txt`에 포함)
+
+**주의사항**:
+- 메인 파이프라인 (`src/app.py`)과 완전히 독립적
+- LangGraph 또는 에이전트 실행 없음
+- 샘플 데이터만 사용하므로 빠른 테스트에 적합
 
 ### 2. 코드에서 사용
 
@@ -357,14 +372,19 @@ response = llm.invoke(prompt)
 
 ## 🔧 의존성
 
+**이미 메인 프로젝트 requirements.txt에 포함됨**:
 ```bash
-pip install python-docx --break-system-packages  # DOCX 생성
-# pip install langgraph                          # LangGraph 통합 (선택)
+# 프로젝트 루트에서 이미 설치했다면 추가 설치 불필요
+pip install -r requirements.txt
 ```
 
-기타:
+**필수 의존성**:
+- `python-docx>=1.1.0`: DOCX 리포트 생성
 - Python 3.8+
-- Tailwind CSS (CDN, 별도 설치 불필요)
+
+**선택적 의존성**:
+- Tailwind CSS: HTML에 CDN으로 포함 (별도 설치 불필요)
+- LangGraph: 메인 파이프라인과 통합 시 필요 (데모 단독 실행 시 불필요)
 
 ---
 
