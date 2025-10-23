@@ -52,7 +52,6 @@ class RegulationCompliance(BaseModel):
     customs_flow_png: Optional[str] = None
     tbd_ratio: float = 0.0
     risk_badge: Optional[str] = None  # 낮음/보통/높음
-    tbd_ratio: float = 0.0
 
 
 class Competition(BaseModel):
