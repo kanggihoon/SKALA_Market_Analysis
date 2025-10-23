@@ -1,0 +1,23 @@
+company,target_market,competitor,category,homepage
+ShipBob,KR,CJ Logistics,3PL,https://www.cjlogistics.com
+ShipBob,KR,Lotte Global Logistics,3PL,https://www.lotteglogis.com
+ShipBob,KR,Hanjin,Freight Forwarder,https://www.hanjin.com
+ShipBob,KR,Qxpress,Last Mile,https://www.qxpress.co
+ShipBob,KR,Kurly,Fulfillment,https://www.kurly.com
+ShipBob,JP,Yamato Transport,3PL,https://www.kuronekoyamato.co.jp
+ShipBob,JP,Sagawa Express,3PL,https://www.sagawa-exp.co.jp
+ShipBob,JP,Japan Post,Last Mile,https://www.post.japanpost.jp
+ShipBob,JP,Rakuten Logistics,Fulfillment,https://logistics.rakuten.co.jp
+ShipBob,JP,Nippon Express,Freight Forwarder,https://www.nittsu.co.jp
+Locus.sh,US,FedEx Fulfillment,3PL,https://www.fedex.com/en-us/fulfillment
+Locus.sh,US,UPS Supply Chain Solutions,3PL,https://www.ups.com/scs
+Locus.sh,US,Amazon Logistics,Fulfillment,https://logistics.amazon.com
+Locus.sh,US,ShipBob,Fulfillment,https://www.shipbob.com
+Locus.sh,US,Flexport,Freight Forwarder,https://www.flexport.com
+Locus.sh,KR,CJ Logistics,3PL,https://www.cjlogistics.com
+Locus.sh,KR,Lotte Global Logistics,3PL,https://www.lotteglogis.com
+Ninja Van,JP,Yamato Transport,3PL,https://www.kuronekoyamato.co.jp
+Ninja Van,JP,Sagawa Express,3PL,https://www.sagawa-exp.co.jp
+Ninja Van,JP,Japan Post,Last Mile,https://www.post.japanpost.jp
+Ninja Van,JP,DHL eCommerce Japan,Last Mile,https://www.dhl.com/jp-en/home
+Ninja Van,JP,Rakuten Logistics,Fulfillment,https://logistics.rakuten.co.jp
