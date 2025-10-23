@@ -87,6 +87,22 @@ def run(state, meta, out_dir: str):
             if llm_texts.get('exec'):
                 doc.add_paragraph(llm_texts['exec'])
 
+            # Helpers for images (standardized filenames)
+            def _img(path: str, width_in: float = 6.0):
+                try:
+                    if os.path.exists(path):
+                        doc.add_picture(path, width=Inches(width_in))
+                        return True
+                except Exception:
+                    pass
+                return False
+
+            std_market = os.path.join(section, f"01_market_summary_{name}_{country}.png")
+            std_customs = os.path.join(section, f"02_customs_flow_{name}_{country}.png")
+            std_heatmap = os.path.join(section, f"03_competition_heatmap_{name}_{country}.png")
+            std_partner = os.path.join(section, f"04_partner_map_{name}_{country}.png")
+            std_map = os.path.join(section, f"map_{name}_{country}.png")
+
             # 2) Market
             doc.add_paragraph("2) Market")
             if llm_texts.get('market'):
@@ -102,6 +118,8 @@ def run(state, meta, out_dir: str):
                     f"Why Now: {why}"
                 )
                 doc.add_paragraph(market_txt)
+            # Market image directly under narrative
+            _img(std_market, width_in=6.0)
 
             # 3) Regulation
             doc.add_paragraph("3) Regulation")
@@ -113,6 +131,8 @@ def run(state, meta, out_dir: str):
                 blocker_txt = 'Yes' if (sc0.get('blocker') or False) else 'No'
                 reg_line = f"Coverage {cov_pct}%, TBD {tbd_pct}%, MUST violation {blocker_txt}."
                 doc.add_paragraph(reg_line)
+            # Customs flow image
+            _img(std_customs, width_in=6.0)
 
             # 4) Competition
             comp = case.get("competition", {}) if case else {}
@@ -135,6 +155,21 @@ def run(state, meta, out_dir: str):
                     row[0].text = e.get('name','')
                     row[1].text = e.get('category','')
                     row[2].text = e.get('homepage','')
+            # Competition images (heatmap + base map) side-by-side to reduce vertical whitespace
+            if os.path.exists(std_heatmap) or os.path.exists(std_map):
+                tbl = doc.add_table(rows=1, cols=2)
+                cells = tbl.rows[0].cells
+                try:
+                    if os.path.exists(std_heatmap):
+                        run = cells[0].paragraphs[0].add_run()
+                        run.add_picture(std_heatmap, width=Inches(3.15))
+                    if os.path.exists(std_map):
+                        run = cells[1].paragraphs[0].add_run()
+                        run.add_picture(std_map, width=Inches(3.15))
+                except Exception:
+                    # Fallback to stacked if table approach fails
+                    _img(std_heatmap, width_in=6.0)
+                    _img(std_map, width_in=6.0)
 
             # 5) GTM
             gtm = case.get("gtm", {}) if case else {}
@@ -162,6 +197,8 @@ def run(state, meta, out_dir: str):
                 doc.add_paragraph(f"{len(partners)} partner candidates.")
                 for p in partners:
                     doc.add_paragraph(f"{p.get('name','')} ({p.get('role','')}) · priority={p.get('priority','')}", style="List Bullet")
+            # Partner map image
+            _img(std_partner, width_in=6.0)
 
             # 7) Risks
             risks = case.get("risks", []) if case else []
@@ -189,7 +226,7 @@ def run(state, meta, out_dir: str):
             else:
                 doc.add_paragraph(overall)
 
-            # 10) 30/60/90 + Evidence
+            # 10) 30/60/90 + Evidence (keep concise; images already placed near narratives)
             if any(llm_texts.get(k) for k in ('plan_30','plan_60','plan_90')):
                 doc.add_paragraph("10) 30/60/90 plan")
                 if llm_texts.get('plan_30'):
@@ -199,30 +236,9 @@ def run(state, meta, out_dir: str):
                 if llm_texts.get('plan_90'):
                     doc.add_paragraph(llm_texts['plan_90'])
 
-            # Evidence summary
-            try:
-                doc.add_paragraph("Evidence")
-                comp = case.get('competition', {}) if case else {}
-                ents = comp.get('entities', []) if comp else []
-                reg_items = (state.reg_compliance.items if (state and getattr(state, 'reg_compliance', None)) else [])
-                added = 0
-                for it in (reg_items or []):
-                    for ev in (it.evidence or [])[:2]:
-                        url = ev.get('url') or ev.get('link')
-                        if url:
-                            doc.add_paragraph(f"Regulation: {it.title} - {url}")
-                            added += 1
-                            if added >= 2:
-                                break
-                    if added >= 2:
-                        break
-                for e in ents[:2]:
-                    if e.get('homepage'):
-                        doc.add_paragraph(f"Competition: {e.get('name','')} - {e.get('homepage')}")
-            except Exception:
-                pass
-
-            doc.add_page_break()
+            # Keep pagination minimal: optional page break via env
+            if str(os.getenv('PAGE_BREAK_BETWEEN_CASES','0')).lower() in ('1','true','yes'):
+                doc.add_page_break()
 
     # Save file
     try:

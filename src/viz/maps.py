@@ -4,6 +4,7 @@ import math
 import warnings
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 from matplotlib import patches
 from loguru import logger
 import requests
@@ -129,16 +130,83 @@ def render_competition_heatmap(company, country, extra_entities=None):
         plt.close(fig)
 
     # Heatmap placeholder
-    # Heatmap (use independent RNG so it works whether Google map succeeded or not)
-    rng_heat = np.random.default_rng(abs(hash(f"{company}|{country}|heatmap")) % (2**32))
-    fig2, ax2 = plt.subplots(figsize=(8, 4), dpi=100)
-    ax2.set_title(f"Competition Heatmap | {company} - {country}")
-    grid = rng_heat.random((5, 10))
-    im = ax2.imshow(grid, cmap='YlOrRd', aspect='auto')
-    ax2.set_xticks([]); ax2.set_yticks([])
-    fig2.colorbar(im, ax=ax2, shrink=0.8)
-    fig2.savefig(heat_png, dpi=100, bbox_inches='tight')
-    plt.close(fig2)
+    # Build a density heatmap over the basemap with transparency so it's clearly a map
+    try:
+        base = mpimg.imread(map_png)
+        h, w = base.shape[0], base.shape[1]
+
+        # Helper: WebMercator conversions
+        def _latlng_to_world_xy(lat, lng, zoom):
+            scale = 256 * (2 ** zoom)
+            x = (lng + 180.0) / 360.0 * scale
+            siny = math.sin(math.radians(lat))
+            y = (0.5 - math.log((1 + siny) / (1 - siny)) / (4 * math.pi)) * scale
+            return x, y
+        def _world_xy_to_latlng(x, y, zoom):
+            scale = 256 * (2 ** zoom)
+            lng = x / scale * 360.0 - 180.0
+            n = math.pi * (1 - 2 * (y / scale))
+            lat = math.degrees(math.atan(math.sinh(n)))
+            return lat, lng
+
+        # Compute geographic extent for imshow so overlays align with basemap
+        if isinstance(center, str) and "," in center:
+            c_lat, c_lng = [float(v) for v in center.split(",", 1)]
+        else:
+            # fallback capitals
+            c_lat, c_lng = (37.5665, 126.9780) if country == "KR" else ((35.6762, 139.6503) if country == "JP" else (40.0, -95.0))
+        cx, cy = _latlng_to_world_xy(c_lat, c_lng, zoom)
+        left = cx - w/2; right = cx + w/2; top = cy - h/2; bottom = cy + h/2
+        lat_top, lng_left = _world_xy_to_latlng(left, top, zoom)
+        lat_bot, lng_right = _world_xy_to_latlng(right, bottom, zoom)
+
+        fig2, ax2 = plt.subplots(figsize=(w/100, h/100), dpi=100)
+        ax2.imshow(base, extent=[lng_left, lng_right, lat_bot, lat_top])
+        ax2.set_xlim(lng_left, lng_right); ax2.set_ylim(lat_bot, lat_top)
+        ax2.set_xticks([]); ax2.set_yticks([])
+
+        # If we have real markers (lat/lng), create a density grid; else use a light vignette
+        if markers:
+            lngs = np.array([m['lng'] for m in markers])
+            lats = np.array([m['lat'] for m in markers])
+            # 2D histogram over map extent
+            bins_x = 60; bins_y = 30
+            H, xedges, yedges = np.histogram2d(lngs, lats, bins=[bins_x, bins_y], range=[[lng_left, lng_right], [lat_bot, lat_top]])
+            # Simple Gaussian-like blur via separable kernel
+            ker = np.array([1, 2, 4, 2, 1], dtype=float)
+            ker = ker / ker.sum()
+            # blur x
+            Hx = np.apply_along_axis(lambda v: np.convolve(v, ker, mode='same'), axis=0, arr=H)
+            # blur y
+            Hxy = np.apply_along_axis(lambda v: np.convolve(v, ker, mode='same'), axis=1, arr=Hx)
+            Hxy = Hxy.T  # align to imshow orientation
+            alpha = 0.45
+            ax2.imshow(
+                Hxy,
+                extent=[lng_left, lng_right, lat_bot, lat_top],
+                origin='lower',
+                cmap='YlOrRd',
+                alpha=alpha,
+                aspect='auto',
+                interpolation='bilinear',
+            )
+        else:
+            # subtle overlay to indicate lack of data
+            ax2.add_patch(patches.Rectangle((lng_left, lat_bot), (lng_right - lng_left), (lat_top - lat_bot), facecolor='white', alpha=0.12, linewidth=0))
+
+        ax2.set_title(f"Competition Density | {company} - {country}")
+        fig2.savefig(heat_png, dpi=100, bbox_inches='tight', pad_inches=0)
+        plt.close(fig2)
+    except Exception:
+        # Fallback: simple translucent grid as last resort
+        rng_heat = np.random.default_rng(abs(hash(f"{company}|{country}|heatmap")) % (2**32))
+        fig2, ax2 = plt.subplots(figsize=(8, 4), dpi=100)
+        ax2.set_title(f"Competition Heatmap | {company} - {country}")
+        grid = rng_heat.random((5, 10))
+        ax2.imshow(grid, cmap='YlOrRd', aspect='auto', alpha=0.5)
+        ax2.set_xticks([]); ax2.set_yticks([])
+        fig2.savefig(heat_png, dpi=100, bbox_inches='tight')
+        plt.close(fig2)
 
     positioning = {"axis": ["price", "service"], "point": "mid-high"}
     whitespaces = ["SE corridor", "Port-adjacent SMB", "Cross-border niche"]
