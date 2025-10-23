@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스타트업A (한국 물류 SaaS) × 베트남 시장 진출 전략</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            border: 2px solid;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+        }
+        
+        @media print {
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            .card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <!-- 헤더 -->
+    <div class="gradient-bg text-white p-8 rounded-2xl mb-8">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl font-bold mb-2">스타트업A (한국 물류 SaaS) × 베트남</h1>
+            <p class="text-xl opacity-90">다국적 시장 진출 전략 보고서</p>
+            <p class="text-sm opacity-75 mt-4">생성일: 2025년 10월 23일</p>
+        </div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto space-y-8">
+        
+        <!-- Executive Summary -->
+        <div class="card p-8">
+            <h2 class="section-title">📋 Executive Summary</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-lg mb-3">최종 의사결정</h3>
+                    <div class="flex items-center gap-4">
+                        <span class="badge bg-blue-600 text-white">진행 (추천)</span>
+                        <div class="score-circle bg-blue-500 text-white">
+                            72점
+                        </div>
+                    </div>
+                    <p class="mt-4 text-gray-700">시장 성장성(85점)과 실행 가능성(75점)이 높고, 규제 리스크는 DPA 체결로 관리 가능한 수준입니다. 농촌/콜드체인 화이트스페이스가 명확하여 차별화 가능합니다.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-3">주요 지표</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">규제 커버리지</span>
+                                <span class="text-sm font-bold">76%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 76.0%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">규제 리스크</span>
+                            <span class="badge bg-yellow-100 text-yellow-800 border-yellow-300">보통</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">파트너 후보</span>
+                            <span class="font-bold text-lg">4개사</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 시장 조사 -->
+        <div class="card p-8">
+            <h2 class="section-title">🌍 시장 조사</h2>
+            <div class="mb-6">
+                <h3 class="font-bold text-lg mb-3">핵심 지표</h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    
+                <div class="metric-card">
+                    <div class="text-2xl font-bold text-gray-800 mb-1">$2.5B</div>
+                    <div class="text-sm text-gray-600">TAM (전체 시장)</div>
+                </div>
+            
+                <div class="metric-card">
+                    <div class="text-2xl font-bold text-gray-800 mb-1">15% YoY</div>
+                    <div class="text-sm text-gray-600">연간 성장률</div>
+                </div>
+            
+                <div class="metric-card">
+                    <div class="text-2xl font-bold text-gray-800 mb-1">500M건</div>
+                    <div class="text-sm text-gray-600">연간 택배량</div>
+                </div>
+            
+                <div class="metric-card">
+                    <div class="text-2xl font-bold text-gray-800 mb-1">$2.50</div>
+                    <div class="text-sm text-gray-600">평균 배송비</div>
+                </div>
+            
+                <div class="metric-card">
+                    <div class="text-2xl font-bold text-gray-800 mb-1">2-3일</div>
+                    <div class="text-sm text-gray-600">평균 리드타임</div>
+                </div>
+            
+                <div class="metric-card">
+                    <div class="text-2xl font-bold text-gray-800 mb-1">35% YoY</div>
+                    <div class="text-sm text-gray-600">이커머스 성장</div>
+                </div>
+            
+                <div class="metric-card">
+                    <div class="text-2xl font-bold text-gray-800 mb-1">30% (연 7% 증가)</div>
+                    <div class="text-sm text-gray-600">중산층 비율</div>
+                </div>
+            
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="font-bold text-lg mb-3">Why Now?</h3>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                    <p class="text-gray-800">이커머스가 급성장(35% YoY)하며 중산층이 확대(연 7% 증가)되면서 빠른 배송 수요가 폭증하고 있습니다. 정부의 물류 인프라 투자로 진입 장벽이 완화되어 지금이 최적의 진입 시기입니다.</p>
+                </div>
+            </div>
+            
+            
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">수요 히트맵</h3>
+                    <div class="bg-gray-100 rounded-lg p-8 text-center text-gray-500">
+                        이미지 생성 중...
+                    </div>
+                </div>
+            
+        </div>
+        
+        <!-- 규제 검토 -->
+        <div class="card p-8">
+            <h2 class="section-title">✅ 규제 검토</h2>
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-lg font-semibold">커버리지: 76%</span>
+                    <span class="badge bg-yellow-100 text-yellow-800 border-yellow-300">
+                        리스크: 보통
+                    </span>
+                </div>
+                
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left font-semibold">항목</th>
+                            <th class="py-3 px-4 text-center font-semibold">등급</th>
+                            <th class="py-3 px-4 text-center font-semibold">상태</th>
+                            <th class="py-3 px-4 text-left font-semibold">근거/출처</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">택배업 등록 (Postal Service License)</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-red-100 text-red-800 border-red-300">MUST</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-green-100 text-green-800">PASS</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">Decree 163/2017/ND-CP, 국토부 고시 확인</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">개인정보 국외이전 (DPA/SCC)</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-red-100 text-red-800 border-red-300">MUST</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-gray-100 text-gray-800">TBD</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">Personal Data Protection Decree 13/2023 해당, 근거 미확보</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">전자상거래 환불·반품 고지</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-orange-100 text-orange-800 border-orange-300">SHOULD</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-green-100 text-green-800">PASS</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">Law on Consumer Protection 2010, 공정위 가이드라인</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">표시·광고 규제 준수</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-orange-100 text-orange-800 border-orange-300">SHOULD</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-yellow-100 text-yellow-800">WARN</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">업계 블로그만 존재, 공식 문서 미확인</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">FTZ (자유무역지대) 관세 특례</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-blue-100 text-blue-800 border-blue-300">NICE</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-gray-50 text-gray-500">NA</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">선택사항, 해당 없음</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">창고업 허가 (Warehousing License)</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-red-100 text-red-800 border-red-300">MUST</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-green-100 text-green-800">PASS</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">Decree 163/2017/ND-CP Article 15</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">라이더 안전교육/보험</td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-orange-100 text-orange-800 border-orange-300">SHOULD</span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <span class="badge bg-yellow-100 text-yellow-800">WARN</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">Labor Code 요구사항 있으나 상세 기준 모호</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            </div>
+            
+            
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">통관·관세 플로우</h3>
+                    <div class="bg-gray-100 rounded-lg p-8 text-center text-gray-500">
+                        이미지 생성 중...
+                    </div>
+                </div>
+            
+        </div>
+        
+        <!-- 경쟁사 지도 -->
+        <div class="card p-8">
+            <h2 class="section-title">🗺️ 경쟁사 분석</h2>
+            
+            <div class="mb-6">
+                <h3 class="font-bold text-lg mb-3">화이트스페이스 (기회 영역)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                    <div class="text-3xl mb-2">💡</div>
+                    <p class="text-gray-800 font-medium">🌾 농촌 지역 당일배송 서비스 부재 - 메콩델타 인프라는 있으나 업체 없음</p>
+                </div>
+            
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                    <div class="text-3xl mb-2">🎯</div>
+                    <p class="text-gray-800 font-medium">❄️ 프리미엄 콜드체인 물류 미개척 - 의약품/화장품 B2B 수요 높음</p>
+                </div>
+            
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-lg border-2 border-purple-200">
+                    <div class="text-3xl mb-2">🚀</div>
+                    <p class="text-gray-800 font-medium">🏪 중소기업 전용 통합 물류 플랫폼 없음 - 영세상인 페인포인트 존재</p>
+                </div>
+            
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">경쟁 밀집 지도</h3>
+                    <div class="bg-gray-100 rounded-lg p-8 text-center text-gray-500">
+                        이미지 생성 중...
+                    </div>
+                </div>
+            
+                
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">포지셔닝 매트릭스</h3>
+                    <div class="bg-gray-100 rounded-lg p-8 text-center text-gray-500">
+                        이미지 생성 중...
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+        
+        <!-- 파트너 발굴 -->
+        <div class="card p-8">
+            <h2 class="section-title">🤝 파트너 발굴</h2>
+            
+            <div class="mb-6">
+                <h3 class="font-bold text-lg mb-3">파트너 후보 (4개사)</h3>
+                
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left font-semibold">업체명</th>
+                            <th class="py-3 px-4 text-left font-semibold">역할</th>
+                            <th class="py-3 px-4 text-left font-semibold">선정 이유</th>
+                            <th class="py-3 px-4 text-left font-semibold">대안</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4 font-medium">Vietnam Post (VietPost)</td>
+                    <td class="py-3 px-4">
+                        <span class="badge bg-blue-100 text-blue-800 border-blue-300">라스트마일 배송</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">국영우편 전국 네트워크 보유, B2G 신뢰도 높음</td>
+                    <td class="py-3 px-4 text-sm text-gray-500">Giao Hang Nhanh (GHN) - 민간 1위</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4 font-medium">FPT Software</td>
+                    <td class="py-3 px-4">
+                        <span class="badge bg-blue-100 text-blue-800 border-blue-300">시스템 통합 (SI)</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">베트남 IT 1위, 물류 프로젝트 경험 풍부</td>
+                    <td class="py-3 px-4 text-sm text-gray-500">TMA Solutions</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4 font-medium">GlobalPort Logistics</td>
+                    <td class="py-3 px-4">
+                        <span class="badge bg-blue-100 text-blue-800 border-blue-300">통관 브로커</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">하이퐁/호치민 항만 특화, 빠른 통관 처리</td>
+                    <td class="py-3 px-4 text-sm text-gray-500">Saigon Newport</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4 font-medium">Shopee Vietnam</td>
+                    <td class="py-3 px-4">
+                        <span class="badge bg-blue-100 text-blue-800 border-blue-300">플랫폼 파트너</span>
+                    </td>
+                    <td class="py-3 px-4 text-sm text-gray-600">베트남 이커머스 1위, 판매자 물류 수요 대량</td>
+                    <td class="py-3 px-4 text-sm text-gray-500">Lazada Vietnam</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            </div>
+            
+            
+                <div class="mb-6">
+                    <h3 class="font-bold text-lg mb-3">파트너 연결 맵</h3>
+                    <div class="bg-gray-100 rounded-lg p-8 text-center text-gray-500">
+                        이미지 생성 중...
+                    </div>
+                </div>
+            
+            
+            <div class="mt-6">
+                <h3 class="font-bold text-lg mb-3">PoC 제안서 초안</h3>
+                <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <pre class="whitespace-pre-wrap font-sans text-sm text-gray-700">
+**1단계: 호치민 시범 운영 (3개월)**
+- 목표: 월 10K 건, 배송 성공률 95% 이상
+- 파트너: VietPost (라스트마일) + FPT (시스템)
+- 주요 고객: Shopee 판매자 50명
+
+**2단계: 하노이 확장 (3개월)**
+- 목표: 월 30K 건, 2개 도시 커버
+- 추가 파트너: 하노이 창고 3PL
+
+**3단계: 전국 네트워크 (6개월)**
+- 목표: 월 100K 건, Top 5 도시 커버
+- 콜드체인 서비스 출시
+</pre>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 리스크 시나리오 -->
+        <div class="card p-8">
+            <h2 class="section-title">⚠️ 리스크 시나리오</h2>
+            
+            <div class="mb-6">
+                <h3 class="font-bold text-lg mb-3">리스크 레지스터</h3>
+                
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left font-semibold">리스크</th>
+                            <th class="py-3 px-4 text-center font-semibold">가능성</th>
+                            <th class="py-3 px-4 text-center font-semibold">영향</th>
+                            <th class="py-3 px-4 text-left font-semibold">초기 징후</th>
+                            <th class="py-3 px-4 text-left font-semibold">완화 전략</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">개인정보보호법 강화로 DPA 없이 영업 불가</td>
+                    <td class="py-3 px-4 text-center text-yellow-600 font-semibold">보통</td>
+                    <td class="py-3 px-4 text-center text-red-600 font-semibold">높음</td>
+                    <td class="py-3 px-4 text-sm text-gray-600">국회 법안 상정 뉴스, 정부 발표</td>
+                    <td class="py-3 px-4 text-sm text-gray-700">DPA 사전 체결 + 현지 데이터센터 확보</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">주요 파트너 (VietPost) 이탈 또는 SLA 미달</td>
+                    <td class="py-3 px-4 text-center text-green-600 font-semibold">낮음</td>
+                    <td class="py-3 px-4 text-center text-red-600 font-semibold">높음</td>
+                    <td class="py-3 px-4 text-sm text-gray-600">월 배송 성공률 < 90%</td>
+                    <td class="py-3 px-4 text-sm text-gray-700">GHN과 백업 계약 체결</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">현지 경쟁사 (GHN, Ninja Van) 가격 공세</td>
+                    <td class="py-3 px-4 text-center text-red-600 font-semibold">높음</td>
+                    <td class="py-3 px-4 text-center text-yellow-600 font-semibold">보통</td>
+                    <td class="py-3 px-4 text-sm text-gray-600">시장 점유율 정체, 이탈율 증가</td>
+                    <td class="py-3 px-4 text-sm text-gray-700">프리미엄 서비스 (콜드체인) 차별화</td>
+                </tr>
+            
+                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                    <td class="py-3 px-4">환율 변동 (VND/USD) 리스크</td>
+                    <td class="py-3 px-4 text-center text-yellow-600 font-semibold">보통</td>
+                    <td class="py-3 px-4 text-center text-yellow-600 font-semibold">보통</td>
+                    <td class="py-3 px-4 text-sm text-gray-600">환율 ±10% 이상 변동</td>
+                    <td class="py-3 px-4 text-sm text-gray-700">헷징 계약 + 현지 통화 수익 확대</td>
+                </tr>
+            
+                    </tbody>
+                </table>
+            </div>
+        
+            </div>
+            
+            <div class="mt-6">
+                <h3 class="font-bold text-lg mb-3">시나리오별 KPI 범위</h3>
+                
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-red-50 p-6 rounded-lg border-2 border-red-200">
+                    <h4 class="font-bold text-lg mb-3 text-red-800">😰 비관 시나리오</h4>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <p><span class='font-semibold'>월 거래량:</span> 10K건</p><p><span class='font-semibold'>월 수익:</span> -$50K</p><p><span class='font-semibold'>조건:</span> 경쟁 심화 + 규제 강화 + 파트너 이탈</p>
+                    </div>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                    <h4 class="font-bold text-lg mb-3 text-blue-800">😐 기준 시나리오</h4>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <p><span class='font-semibold'>월 거래량:</span> 30K건</p><p><span class='font-semibold'>월 수익:</span> +$20K</p><p><span class='font-semibold'>조건:</span> 계획대로 진행, 시범 운영 성공</p>
+                    </div>
+                </div>
+                <div class="bg-green-50 p-6 rounded-lg border-2 border-green-200">
+                    <h4 class="font-bold text-lg mb-3 text-green-800">😄 낙관 시나리오</h4>
+                    <div class="space-y-2 text-sm text-gray-700">
+                        <p><span class='font-semibold'>월 거래량:</span> 100K건</p><p><span class='font-semibold'>월 수익:</span> +$150K</p><p><span class='font-semibold'>조건:</span> Shopee 전략적 파트너십 + 콜드체인 조기 성공</p>
+                    </div>
+                </div>
+            </div>
+        
+            </div>
+        </div>
+        
+        <!-- 의사결정 스코어카드 -->
+        <div class="card p-8">
+            <h2 class="section-title">🎯 의사결정 스코어카드</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div class="bg-white p-6 rounded-lg border-2 border-gray-200">
+                    <h4 class="font-semibold mb-3 text-gray-700">시장 매력도</h4>
+                    <div class="flex items-end gap-4">
+                        <div class="text-3xl font-bold text-gray-800">85</div>
+                        <div class="flex-1">
+                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="bg-green-500 h-full transition-all duration-500" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="bg-white p-6 rounded-lg border-2 border-gray-200">
+                    <h4 class="font-semibold mb-3 text-gray-700">규제 리스크</h4>
+                    <div class="flex items-end gap-4">
+                        <div class="text-3xl font-bold text-gray-800">65</div>
+                        <div class="flex-1">
+                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="bg-yellow-500 h-full transition-all duration-500" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="bg-white p-6 rounded-lg border-2 border-gray-200">
+                    <h4 class="font-semibold mb-3 text-gray-700">경쟁 강도</h4>
+                    <div class="flex items-end gap-4">
+                        <div class="text-3xl font-bold text-gray-800">60</div>
+                        <div class="flex-1">
+                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="bg-yellow-500 h-full transition-all duration-500" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="bg-white p-6 rounded-lg border-2 border-gray-200">
+                    <h4 class="font-semibold mb-3 text-gray-700">실행 가능성</h4>
+                    <div class="flex items-end gap-4">
+                        <div class="text-3xl font-bold text-gray-800">75</div>
+                        <div class="flex-1">
+                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="bg-green-500 h-full transition-all duration-500" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="bg-white p-6 rounded-lg border-2 border-gray-200">
+                    <h4 class="font-semibold mb-3 text-gray-700">파트너 가용성</h4>
+                    <div class="flex items-end gap-4">
+                        <div class="text-3xl font-bold text-gray-800">80</div>
+                        <div class="flex-1">
+                            <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="bg-green-500 h-full transition-all duration-500" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            
+            <div class="mt-6 p-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg">
+                <h3 class="font-bold text-2xl mb-2">최종 결론</h3>
+                <p class="text-xl mb-4">진행 (추천)</p>
+                <p class="text-lg opacity-90">시장 성장성(85점)과 실행 가능성(75점)이 높고, 규제 리스크는 DPA 체결로 관리 가능한 수준입니다. 농촌/콜드체인 화이트스페이스가 명확하여 차별화 가능합니다.</p>
+                
+            <div class="mt-6 pt-6 border-t border-white/30">
+                <h4 class="font-bold text-lg mb-3">📌 Next Steps</h4>
+                <ul class="space-y-2">
+                    <li class='flex items-start gap-3'><span class='font-bold'>1.</span><span>1️⃣ DPA 협약 체결 가능성 재검토 및 현지 법무법인 미팅 (2주 이내)</span></li><li class='flex items-start gap-3'><span class='font-bold'>2.</span><span>2️⃣ VietPost와 MOU 체결 협의 시작 (1개월 이내)</span></li><li class='flex items-start gap-3'><span class='font-bold'>3.</span><span>3️⃣ FPT Software와 시스템 통합 PoC 제안서 작성 (2주 이내)</span></li><li class='flex items-start gap-3'><span class='font-bold'>4.</span><span>4️⃣ 호치민 파일럿 준비: 파트너 선정 및 창고 확보 (2개월 이내)</span></li><li class='flex items-start gap-3'><span class='font-bold'>5.</span><span>5️⃣ Shopee Vietnam 비즈니스 개발팀 컨택 (1개월 이내)</span></li>
+                </ul>
+            </div>
+        
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- 푸터 -->
+    <div class="max-w-6xl mx-auto mt-8 text-center text-gray-500 text-sm">
+        <p>Generated by Multi-Market Entry Strategy Agent v1.0</p>
+        <p class="mt-2">이 보고서는 자동 생성된 전략 분석 결과입니다. 최종 의사결정 시 전문가 검토를 권장합니다.</p>
+    </div>
+</body>
+</html>

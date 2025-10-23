@@ -1,0 +1,67 @@
+{
+  "companies": [
+    {
+      "name": "ShipBob",
+      "size": "Mid",
+      "hq_country": "US",
+      "target_countries": ["KR", "JP"],
+      "sector": "3PL/Ecommerce Logistics",
+      "notes": {
+        "hypothesis": "크로스보더 이커머스 셀러 대상 2~3일 리드타임 풀필 번들",
+        "scope": "국내 풀필+라스트마일 파트너 연동, 통관 브로커 위탁",
+        "exclusions": ["초고속 당일배송(프라임급)은 초기 제외"],
+        "icp_hint": "월 출고량 2k~20k D2C/마켓플 셀러",
+        "channel_hint": ["3PL/브로커 리셀", "마켓플 연동"],
+        "pricing_hint": "ARPA $2k~$8k/월(티어)",
+        "integration": ["Shopify", "WMS API", "쿠팡/라쿠텐 연동"],
+        "constraints": ["개인정보 국외이전 합법 경로 필요", "KR 통관 인보이스 요건"],
+        "partners_pref": ["대형 3PL 2곳 이상", "통관 브로커 1곳"],
+        "kpi_focus": ["온보딩 기간", "OTD≥95%", "반품율"],
+        "timeline": "D90 내 PoC 1건",
+        "risk_flags": ["규제 해석 지연", "가격경쟁 심화"]
+      }
+    },
+    {
+      "name": "Locus.sh",
+      "size": "Mid",
+      "hq_country": "IN",
+      "target_countries": ["US"],
+      "sector": "Logistics SaaS/Route Opt",
+      "notes": {
+        "hypothesis": "미국 라스트/미들마일 라우팅 SaaS로 진입",
+        "scope": "SaaS 구독형 + SI/컨설팅 파트너를 통한 엔터프라이즈 적용",
+        "exclusions": ["하드웨어/디바이스 공급"],
+        "icp_hint": "일 배송건수 5k~100k 보유 리테일/CEP/식음료",
+        "channel_hint": ["SI/리셀러", "Direct Enterprise"],
+        "pricing_hint": "ACV $60k~$200k/년",
+        "integration": ["TMS", "WMS", "OMS API"],
+        "constraints": ["데이터 보호(CCPA 등) 및 리전 호스팅 선택지 필요"],
+        "partners_pref": ["미국 SI 1~2곳", "3PL 얼라이언스"],
+        "kpi_focus": ["km/stop 감소", "정시율", "기사 생산성"],
+        "timeline": "엔터프라이즈 PoC 1곳(분기 내)",
+        "risk_flags": ["장기 세일즈 사이클", "현지 커스터마이징 부담"]
+      }
+    },
+    {
+      "name": "Ninja Van",
+      "size": "Large",
+      "hq_country": "SG",
+      "target_countries": ["JP"],
+      "sector": "CEP/Last Mile",
+      "notes": {
+        "hypothesis": "동남아-일본 크로스보더 라스트마일 연계 패키지",
+        "scope": "현지 CEP/3PL 파트너와 조인트 패키지 제공",
+        "exclusions": ["순수 내수 CEP 단독 서비스"],
+        "icp_hint": "동남아 판매자의 일본 역직구 배송",
+        "channel_hint": ["파트너 얼라이언스", "마켓플 공동 프로모션"],
+        "pricing_hint": "건당 요율 + 월 최소 과금",
+        "integration": ["라쿠텐/아마존 JP", "통관·D2D 추적"],
+        "constraints": ["반품/표시 규정 준수", "라벨 표준 적합"],
+        "partners_pref": ["일본 3PL/CEP 2곳", "브로커 1곳"],
+        "kpi_focus": ["리드타임", "손상/분실률", "CS 응답 SLA"],
+        "timeline": "쿼터 내 파트너 MoU",
+        "risk_flags": ["현지 CEP와 코피티션", "라스트마일 요율 변동"]
+      }
+    }
+  ]
+}

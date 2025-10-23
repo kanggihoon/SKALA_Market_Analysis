@@ -1,0 +1,99 @@
+{
+  "company": "ShipBob",
+  "country": "KR",
+  "decision": {
+    "status": "RECOMMEND",
+    "scorecard": {
+      "base": 70,
+      "cov": 0.6,
+      "tbd_ratio": 0.3,
+      "competition_high": false,
+      "partners": 3,
+      "final": 65
+    },
+    "reason": "coverage=60%, TBD=30%, score=65"
+  },
+  "coverage": 0.6,
+  "tbd_ratio": 0.3,
+  "risk_badge": "높음",
+  "market": {
+    "why_now": "크로스보더 수요 증가와 물류 인프라 개선으로 진입 타이밍 양호",
+    "metrics": {
+      "TAM": "~$1.2B",
+      "CAGR": "8%",
+      "Ecom Penetration": "34%",
+      "Infra Score": "78",
+      "Avg Ship Cost": "$4.2"
+    }
+  },
+  "competition": {
+    "whitespaces": [
+      "SE corridor",
+      "Port-adjacent SMB",
+      "Cross-border niche"
+    ],
+    "entities": []
+  },
+  "gtm": {
+    "table": [
+      {
+        "segment": "mid",
+        "score": 4.7,
+        "icp": "중견/성장 셀러",
+        "offer": "표준 풀필+가이드 킷"
+      },
+      {
+        "segment": "high",
+        "score": 3.9,
+        "icp": "엔터프라이즈/대형 셀러",
+        "offer": "전담 풀필+SLA+규제패키지"
+      },
+      {
+        "segment": "low",
+        "score": 3.9,
+        "icp": "SMB/크로스보더 시범",
+        "offer": "셀프서비스+라이트 풀필"
+      }
+    ],
+    "selected": "mid"
+  },
+  "partners": [
+    {
+      "name": "ABC Customs",
+      "role": "Customs",
+      "priority": "High"
+    },
+    {
+      "name": "XYZ 3PL",
+      "role": "3PL",
+      "priority": "Mid"
+    },
+    {
+      "name": "SI-One",
+      "role": "SI",
+      "priority": "Mid"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "규제 해석 지연",
+      "prob": "M",
+      "impact": "H",
+      "mitigation": "로펌 의견서",
+      "trigger": "coverage<0.8"
+    },
+    {
+      "risk": "SLA 미달",
+      "prob": "M",
+      "impact": "M",
+      "mitigation": "대체 3PL",
+      "trigger": "OTD<95%"
+    }
+  ],
+  "images": {
+    "market": "01_market_summary_ShipBob_KR.png",
+    "customs": "02_customs_flow_ShipBob_KR.png",
+    "heatmap": "03_competition_heatmap_ShipBob_KR.png",
+    "partner": "04_partner_map_ShipBob_KR.png"
+  }
+}

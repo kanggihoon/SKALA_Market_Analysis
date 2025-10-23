@@ -1,0 +1,29 @@
+{
+  "companies": [
+    {
+      "name": "ShipBob",
+      "size": "Mid",
+      "hq_country": "US",
+      "target_countries": ["KR", "JP"],
+      "sector": "3PL/Ecommerce Logistics",
+      "notes": "데모용"
+    },
+    {
+      "name": "Locus.sh",
+      "size": "Mid",
+      "hq_country": "IN",
+      "target_countries": ["KR"],
+      "sector": "Logistics SaaS/Route Opt",
+      "notes": "데모용"
+    },
+    {
+      "name": "Ninja Van",
+      "size": "Large",
+      "hq_country": "SG",
+      "target_countries": ["JP"],
+      "sector": "CEP/Last Mile",
+      "notes": "데모용"
+    }
+  ]
+}
+
