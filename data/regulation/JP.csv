@@ -1,0 +1,6 @@
+id,category,title,criticality,applicability,status,evidence_url,notes
+LICENSE,License,3PL broker license,MUST,APPLIES,PASS,,
+DATA_XFER,Data,Personal data cross-border transfer,MUST,APPLIES,TBD,,
+REFUND,Ecom,Refund/return policy disclosure,SHOULD,APPLIES,PASS,,
+AD_MARK,Ecom,Advertising disclosure,SHOULD,APPLIES,WARN,,
+FTZ,Customs,Free trade zone benefits,NICE,NA,TBD,,

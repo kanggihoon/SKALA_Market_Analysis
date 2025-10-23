@@ -2,24 +2,23 @@ from ..state_schema import State, InputMeta, Company
 
 
 def run(state: State, meta):
-    # 회사 수==3, 필드 유효성, 국가코드 2자리 등 검증
+    # Validate required fields; allow variable company count
     errors = []
     companies = meta.get("companies", [])
-    if len(companies) != 3:
-        errors.append("companies must be exactly 3")
-    # 간단 필수 필드 체크
+    if not isinstance(companies, list) or len(companies) == 0:
+        errors.append("companies must be a non-empty list")
     required = {"name", "size", "hq_country", "target_countries", "sector"}
     for idx, c in enumerate(companies):
         miss = required - set(c.keys())
         if miss:
             errors.append(f"company[{idx}] missing fields: {sorted(list(miss))}")
-        # 국가코드 2자리 체크
+        # country code validation (ISO2-like)
         for cc in c.get("target_countries", []):
             if not isinstance(cc, str) or len(cc) != 2:
                 errors.append(f"company[{c.get('name','?')}]: invalid country code '{cc}'")
 
     state.input_meta = InputMeta(
-        companies=[Company(**c) for c in companies],
+        companies=[Company(**c) for c in companies if set(required).issubset(c.keys())],
         validated=(len(errors) == 0),
         errors=errors,
     )

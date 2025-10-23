@@ -4,59 +4,59 @@ from ..state_schema import State
 from jinja2 import Template
 
 
-CARD_TMPL = """# {{company}} × {{country}} 전략 카드
-## 요약
-- 결정: **{{decision.status}}** ({{decision.reason}})
-- 규제 커버리지: {{cov_pct}}% (TBD {{tbd_pct}}%, Risk={{risk_badge}})
-- 우선 GTM: {{gtm_selected}}
+CARD_TMPL = """# {{company}} × {{country}} Market Entry
+## Executive
+- Decision: **{{decision.status}}** ({{decision.reason}})
+- Regulation Coverage: {{cov_pct}}% (TBD {{tbd_pct}}%, Risk={{risk_badge}})
+- Chosen GTM: {{gtm_selected}}
 
-## 시장
+## Market
 - Why Now: {{why_now}}
-- 지표: {{metrics}}
+- Metrics: {{metrics}}
 {% if market_png %}
 ![]({{market_png}})
 {% endif %}
 
-## 규제
+## Regulation
 - Blocker: {{blocker}}
 {% if customs_png %}
 ![]({{customs_png}})
 {% endif %}
 
-## 경쟁
-- 화이트스페이스:
+## Competition
+- Whitespaces
 {% for w in whitespaces %}- {{w}}
 {% endfor %}
 {% if heatmap %}
-### 경쟁사 히트맵
+### Competition Heatmap
 ![]({{heatmap}})
 {% endif %}
 {% if markers_map %}
-### 주요 마커 지도
+### Competitor Map
 ![]({{markers_map}})
 {% endif %}
 
 ## GTM
-- 선택: {{gtm_selected}}
+- Selected: {{gtm_selected}}
 
 | Segment | Score | ICP | Offer |
 |---|---:|---|---|
 {% for row in gtm_table %}| {{row.segment}} | {{"%.1f"|format(row.score)}} | {{row.icp}} | {{row.offer}} |
 {% endfor %}
 
-## 파트너
+## Partners
 {% for p in partners %}- {{p.name}} ({{p.role}}) · priority={{p.priority}}
 {% endfor %}
 {% if partner_map %}
 ![]({{partner_map}})
 {% endif %}
 
-## 리스크
+## Risks
 {% for r in risks %}- {{r.risk}} · prob={{r.prob}} · impact={{r.impact}} · mitigation={{r.mitigation}} (trigger: {{r.trigger}})
 {% endfor %}
 
-## 의사결정 점수카드
-| 항목 | 값 |
+## Decision Scorecard
+| key | value |
 |---|---|
 | base | {{scorecard.base}} |
 | coverage | {{scorecard.cov}} |
@@ -77,16 +77,15 @@ def run(state: State, ctx):
     badge = state.reg_compliance.risk_badge if state.reg_compliance else ""
     gtm_sel = state.gtm_merged.selected if state.gtm_merged else "high"
 
-    # Use local filenames so images render relative to MD file
     def bn(p):
         return os.path.basename(p) if p else None
 
     market_png = bn(state.market_summary.market_summary_png if state.market_summary else None)
     customs_png = bn(state.reg_compliance.customs_flow_png if state.reg_compliance else None)
     heatmap = bn(state.competition.heatmap_png if state.competition else None)
+    markers_map = bn(getattr(state.competition, 'markers_map_png', None) if state.competition else None)
     partner_map = bn(state.partners.partner_map_png if state.partners else None)
 
-    # Normalize GTM table rows to simple objects with dot access in Jinja
     class Row(dict):
         __getattr__ = dict.get
 
@@ -108,7 +107,7 @@ def run(state: State, ctx):
         market_png=market_png,
         whitespaces=(state.competition.whitespaces if state.competition else []),
         heatmap=heatmap,
-        markers_map=(state.competition.markers_map_png if state.competition else None),
+        markers_map=markers_map,
         gtm_table=table,
         partners=(state.partners.candidates if state.partners else []),
         partner_map=partner_map,
@@ -118,7 +117,7 @@ def run(state: State, ctx):
     with open(os.path.join(out, f"strategy_card_{company}_{country}.md"), "w", encoding="utf-8") as f:
         f.write(md)
 
-    # Write a concise JSON summary for indexers
+    # Summary JSON for indexers
     summary = {
         "company": company,
         "country": country,
@@ -133,7 +132,7 @@ def run(state: State, ctx):
     with open(os.path.join(out, "summary.json"), "w", encoding="utf-8") as sf:
         json.dump(summary, sf, ensure_ascii=False, indent=2)
 
-    # Write rich case state for DOCX builder
+    # Rich case state for DOCX builder
     case_state = {
         "company": company,
         "country": country,
@@ -164,3 +163,4 @@ def run(state: State, ctx):
     }
     with open(os.path.join(out, "case_state.json"), "w", encoding="utf-8") as cf:
         json.dump(case_state, cf, ensure_ascii=False, indent=2)
+

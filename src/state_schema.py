@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import List, Optional, Dict, Any, Union
 
 
@@ -8,7 +8,6 @@ class Company(BaseModel):
     hq_country: str
     target_countries: List[str]
     sector: str
-    # Accept free-text or structured metadata
     notes: Optional[Union[str, Dict[str, Any]]] = None
 
 
@@ -19,7 +18,7 @@ class InputMeta(BaseModel):
 
 
 class MarketSummary(BaseModel):
-    metrics: Dict[str, Any]      # {"TAM":..., "growth":..., "infra":...}
+    metrics: Dict[str, Any]
     why_now: str
     market_summary_png: Optional[str] = None
 
@@ -51,8 +50,7 @@ class RegulationCompliance(BaseModel):
     blocker: bool = False
     customs_flow_png: Optional[str] = None
     tbd_ratio: float = 0.0
-    risk_badge: Optional[str] = None  # 낮음/보통/높음
-    tbd_ratio: float = 0.0
+    risk_badge: Optional[str] = None
 
 
 class Competition(BaseModel):
@@ -98,3 +96,4 @@ class State(BaseModel):
     risks: Optional[Risks] = None
     decision: Optional[Decision] = None
     artifacts: Dict[str, str] = {}
+

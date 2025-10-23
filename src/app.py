@@ -10,16 +10,14 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-# Apply matplotlib settings VERY early to avoid unicode minus glyph warnings
+# Apply matplotlib settings early
 try:
     import matplotlib  # type: ignore
-    # Use a predictable, headless backend to avoid font/backend inconsistencies
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt  # type: ignore
     plt.rcParams['axes.unicode_minus'] = False
-    # Also clamp matplotlib internal logger to error-level to suppress glyph logs
     try:
-        matplotlib.set_loglevel("error")  # available on matplotlib>=3.3
+        matplotlib.set_loglevel("error")
     except Exception:
         pass
 except Exception:
@@ -36,7 +34,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", required=True, help="data/companies.json")
     parser.add_argument("--out", required=True, help="outputs/")
-    parser.add_argument("--phase", default="phase1", choices=["phase1","full"], help="pipeline phase to run")
+    parser.add_argument("--phase", default="phase1", choices=["phase1", "full"], help="pipeline phase to run")
     args = parser.parse_args()
 
     with open(args.input, "r", encoding="utf-8") as f:
@@ -49,7 +47,6 @@ def main():
         Path.cwd() / ".env",
         ROOT.parent / ".env",
         ROOT / ".env.local",
-        ROOT / ".env.example",  # last-resort fallback (not recommended for secrets)
     ]
     for p in candidates:
         if p.exists():
@@ -63,17 +60,19 @@ def main():
     # Log masked presence of Google key
     gkey = os.getenv("GOOGLE_MAPS_API_KEY")
     if gkey:
-        masked = gkey[:6] + "…" + gkey[-4:]
+        try:
+            masked = f"{gkey[:6]}…{gkey[-4:]}"
+        except Exception:
+            masked = "***masked***"
         logger.info("GOOGLE_MAPS_API_KEY detected: {}", masked)
     else:
         logger.warning("GOOGLE_MAPS_API_KEY not found in environment. Maps will use fallback.")
 
-    # Set fonts early to avoid glyph warnings (e.g., U+2212 minus)
+    # Set fonts early and suppress glyph warnings
     selected = ensure_kr_font()
     if selected:
         logger.info("Matplotlib font set: {} (unicode_minus=False)", selected)
 
-    # Suppress specific glyph warning just in case
     warnings.filterwarnings(
         "ignore",
         message=r"Font '.*' does not have a glyph for '\\u2212'",
@@ -85,7 +84,7 @@ def main():
         category=UserWarning,
     )
 
-    state = State()  # 빈 상태
+    state = State()
     logger.info("Starting pipeline for {} companies", len(meta.get("companies", [])))
     run_pipeline(state, meta, args.out, phase=args.phase)
 
