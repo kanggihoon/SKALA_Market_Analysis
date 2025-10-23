@@ -46,7 +46,7 @@ def run(state: State, ctx):
                 "final": 0,
                 "blocker": True,
             },
-            reason="MUST-FAIL 감지로 HOLD",
+            reason="MUST item FAIL → HOLD",
         )
         return
 
@@ -63,3 +63,4 @@ def run(state: State, ctx):
         },
         reason=f"coverage={cov:.0%}, TBD={tbd_ratio:.0%}, score={score}",
     )
+
