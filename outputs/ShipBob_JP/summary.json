@@ -5,7 +5,7 @@
   "final": 65,
   "coverage": 0.6,
   "tbd_ratio": 0.3,
-  "risk_badge": "높음",
-  "gtm_selected": "mid",
+  "risk_badge": "High",
+  "gtm_selected": "high",
   "card": "strategy_card_ShipBob_JP.md"
 }
