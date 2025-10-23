@@ -28,6 +28,17 @@ def run(state, meta, out_dir: str):
             doc.add_heading(f"{name} × {country}", level=2)
             doc.add_paragraph(f"## Executive")
 
+            # Try to load rich case state
+            case = None
+            case_json = os.path.join(section, "case_state.json")
+            if os.path.exists(case_json):
+                try:
+                    import json
+                    with open(case_json, "r", encoding="utf-8") as f:
+                        case = json.load(f)
+                except Exception:
+                    case = None
+
             # Header KPI badges table
             try:
                 cov = case.get('coverage') if case else None
@@ -70,16 +81,6 @@ def run(state, meta, out_dir: str):
                     for run in p.runs:
                         run.font.size = Pt(10)
 
-            # Try to load rich case state
-            case = None
-            case_json = os.path.join(section, "case_state.json")
-            if os.path.exists(case_json):
-                try:
-                    import json
-                    with open(case_json, "r", encoding="utf-8") as f:
-                        case = json.load(f)
-                except Exception:
-                    case = None
             # Embed standardized images first; fall back to legacy names if needed
             std = [
                 os.path.join(section, f"01_market_summary_{name}_{country}.png"),
