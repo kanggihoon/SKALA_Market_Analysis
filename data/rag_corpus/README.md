@@ -257,15 +257,44 @@ Qxpress
 
 ## 현재 구현 상태
 
-### ✅ 구현됨
-- **Competition CSV 파싱**: `load_competitor_entities()` 함수로 CSV 읽기
-- **경쟁사 지도 생성**: CSV 데이터 → 지도 마커/히트맵
+### ✅ 구현됨 (Competition 데이터)
 
-### ⚠️ 미구현 (보완 예정)
-- **Market PDF 파싱**: 현재는 해시 기반 더미 데이터 생성
-- **Regulation PDF 파싱**: 현재는 하드코딩된 5개 항목만 사용
-- **RAG 벡터 DB 연동**: PDF → 임베딩 → 검색 파이프라인
-- **Evidence 자동 수집**: URL/발행일 자동 추출 및 Citation
+**파일 위치**: `src/utils/competitor_data.py`
+
+**기능**:
+- CSV 파싱: `load_competitor_entities()` 함수로 경쟁사 데이터 로드
+- 컬럼: company, target_market, competitor, category, homepage
+- 카테고리별 색상 매핑 (3PL, Last Mile, Fulfillment, Freight Forwarder 등)
+- 지도 마커 생성: `src/viz/maps.py`에서 경쟁사 위치 표시
+- 히트맵 생성: 경쟁 밀도 시각화
+
+**현재 데이터**:
+- `sample_competitors.csv`: 3개 회사 × 국가별 23개 경쟁사
+- `KR_entities.txt`, `JP_entities.txt`: 국가별 엔티티 목록
+
+**사용 에이전트**: `src/agents/competitor_mapping.py`
+
+### ⚠️ 미구현 (향후 보완 예정)
+
+**Market 데이터**:
+- 현재: 해시 기반 더미 데이터 생성 (케이스별 차별화)
+- 계획: PDF/JSON 파싱 → 실제 시장 리서치 데이터 로드
+- 에이전트: `src/agents/market_research.py`
+
+**Regulation 데이터**:
+- 현재: 하드코딩된 5개 규제 항목 (템플릿 기반)
+- 계획: PDF/JSON 파싱 → 국가별 규제 체크리스트 자동 로드
+- 에이전트: `src/agents/regulation_check.py`
+
+**RAG 파이프라인**:
+- PDF → 임베딩 → 벡터 DB (ChromaDB, FAISS 등)
+- LLM 기반 자동 추출 및 요약
+- Evidence URL/발행일 자동 수집 및 Citation
+
+**향후 로드맵**:
+1. Phase 2: PDF 파서 추가 (PyPDF2, pdfplumber)
+2. Phase 3: 벡터 DB 연동 (ChromaDB)
+3. Phase 4: 웹 크롤러 (자동 데이터 업데이트)
 
 ---
 
@@ -342,20 +371,47 @@ EOF
 
 ## 향후 로드맵
 
-### Phase 1 (현재)
-- [x] Competition CSV 파싱
-- [ ] Market/Regulation은 하드코딩/해시 기반
+### Phase 1 (현재) ✅
+- [x] Competition CSV 파싱 및 지도 생성
+- [x] 해시 기반 Market 데이터 생성 (케이스별 차별화)
+- [x] 템플릿 기반 Regulation 데이터 생성
+- [x] 기본 Evidence 블록 (플레이스홀더)
 
-### Phase 2 (계획)
+### Phase 2 (계획) 🚧
 - [ ] PDF 파서 추가 (PyPDF2, pdfplumber)
-- [ ] RAG 벡터 DB (ChromaDB, FAISS)
-- [ ] LLM 기반 PDF → JSON 변환
+  - Market 리서치 리포트 자동 추출
+  - Regulation 문서 파싱 및 체크리스트 생성
+- [ ] JSON 기반 데이터 오버라이드
+  - 케이스별 시장 지표 커스터마이징
+  - 규제 항목 외부 파일로 관리
+- [ ] LLM 기반 PDF → 구조화 데이터 변환
 
-### Phase 3 (미래)
+### Phase 3 (미래) 🔮
+- [ ] RAG 벡터 DB 연동 (ChromaDB, FAISS)
+  - PDF 임베딩 및 시맨틱 검색
+  - 질의 기반 Evidence 자동 추출
 - [ ] 웹 크롤러 (Selenium, Scrapy)
-- [ ] 자동 데이터 업데이트 (월간)
+  - 경쟁사 웹사이트 자동 수집
+  - 시장 통계 자동 업데이트
 - [ ] Evidence Citation 자동화
+  - URL 유효성 검증
+  - 발행일 자동 추출
+  - 출처 신뢰도 평가
 
 ---
 
-문의: 각 폴더의 `.gitkeep` 파일은 빈 폴더를 Git에 유지하기 위한 플레이스홀더입니다.
+## 참고사항
+
+- 각 폴더의 `.gitkeep` 파일: 빈 폴더를 Git에 유지하기 위한 플레이스홀더
+- 민감한 PDF 파일은 `.gitignore`에 수동 추가 권장
+- 공개 데이터 소스 사용 시 출처 명시 필수
+
+---
+
+## 관련 파일
+
+- **메인 README**: `../../README.md` - 프로젝트 전체 개요
+- **Competition 로더**: `../../src/utils/competitor_data.py`
+- **경쟁사 맵핑 에이전트**: `../../src/agents/competitor_mapping.py`
+- **시장 조사 에이전트**: `../../src/agents/market_research.py`
+- **규제 검토 에이전트**: `../../src/agents/regulation_check.py`
