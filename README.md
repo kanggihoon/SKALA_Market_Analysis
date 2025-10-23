@@ -94,12 +94,59 @@
 
 ## 목차
 
+- [파이프라인 아키텍처](#파이프라인-아키텍처)
 - [1) 구현 현황 (상세)](#1-구현-현황)
 - [2) 폴더 구조](#2-폴더-구조)
 - [3) 실행](#3-실행)
 - [4) 보안/운영 가이드](#4-보안운영-가이드)
 - [5) 데이터 확장 가이드](#5-데이터-확장-가이드)
 - [6) 기여 가이드](#6-기여-가이드)
+
+---
+
+## 파이프라인 아키텍처
+
+### State Schema
+
+파이프라인은 Pydantic 기반의 중앙 집중식 State를 통해 데이터를 관리합니다. 각 노드는 State를 읽고 업데이트하며, 모든 분석 결과는 State 필드에 저장됩니다.
+
+![State Schema](docs/diagrams/01_state_schema.png)
+
+**주요 State 필드**:
+- `input_meta`: 입력 검증 및 회사 메타데이터
+- `market_summary`: 시장 조사 결과 (TAM, CAGR, 지표)
+- `reg_compliance`: 규제 컴플라이언스 분석
+- `competition`: 경쟁사 맵핑 및 화이트스페이스
+- `gtm_high/mid/low`: GTM 세그먼트 카드 (병렬 처리)
+- `gtm_merged`: 최적 세그먼트 선택 결과
+- `partners`: 파트너 후보 목록
+- `risks`: 리스크 레지스터
+- `decision`: 의사결정 스코어카드
+- `artifacts`: 생성된 리포트 파일 경로
+
+### Phase 1: Fast Analysis
+
+빠른 시장 진입 타당성 분석을 위한 경량 파이프라인입니다.
+
+![Phase1 Pipeline](docs/diagrams/02_phase1_pipeline.png)
+
+**플로우**: Input Validation → Market Research → Regulation Check → Decision Maker → Report Writer → HTML Reporter
+
+**실행 시간**: ~2-5분 (3개 회사 × 국가별)
+
+### Full Pipeline: Complete Analysis
+
+전체 분석 모듈을 포함한 상세 전략 수립 파이프라인입니다.
+
+![Full Pipeline](docs/diagrams/03_full_pipeline.png)
+
+**핵심 특징**:
+- **병렬 처리**: GTM 세그먼트 3개 (high/mid/low)를 ThreadPoolExecutor로 동시 실행
+- **팬아웃-팬인 패턴**: 세그먼트별 분석 후 최적 세그먼트 선택
+- **케이스별 루프**: 회사 × 국가 조합마다 독립 실행
+- **통합 리포트**: 모든 케이스 완료 후 Final Reporter가 Word 문서 생성
+
+**실행 시간**: ~5-10분
 
 ---
 
